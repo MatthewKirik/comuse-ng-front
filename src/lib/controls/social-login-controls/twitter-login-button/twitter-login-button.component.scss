@@ -1,0 +1,48 @@
+$white: #fff;
+$background: var(--primary2);
+$button-active-blue: #03A9F4;
+
+
+.twitter-btn {
+  width: 200px;
+  height: 42px;
+  background-color: $background;
+  border-radius: 4px;
+  overflow: hidden;
+  .twitter-icon-wrapper {
+    position: absolute;
+    width: 42px;
+    height: 42px;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .twitter-icon {
+    position: absolute;
+    width: 105%;
+    height: 105%;
+  }
+  .btn-text-wrapper {
+    width: 158px;
+    height: 100%;
+    display: flex;
+    float: right;
+    flex-direction: row;
+    justify-content: center;
+  }
+  .btn-text {
+    margin: 11px 11px 0 0;
+    color: $white;
+    font-size: 14px;
+    letter-spacing: 0.2px;
+    font-family: "Roboto", sans-serif;
+  }
+  &:hover {
+    box-shadow: 0 0 6px $background;
+    background: $button-active-blue;
+  }
+  &:active {
+    background: $button-active-blue;
+  }
+}
+
+@import url(https://fonts.twitterapis.com/css?family=Roboto:500);

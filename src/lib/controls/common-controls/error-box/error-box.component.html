@@ -1,0 +1,6 @@
+<div class="grow error-box-wrapper"
+     [ngClass]="getDirectionClass()"
+>
+  <ng-container *ngTemplateOutlet="errorTemplate"></ng-container>
+</div>
+<ng-container *ngTemplateOutlet="template"></ng-container>

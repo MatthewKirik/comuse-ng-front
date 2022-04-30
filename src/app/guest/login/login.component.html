@@ -1,0 +1,90 @@
+<div class="login-form">
+  <img class="logo" src="/assets/logo/logo.png" alt="Comuse logo">
+  <hr>
+  <div class="buttons">
+    <div class="social-login">
+      <div class="google">
+        <app-google-login-button></app-google-login-button>
+      </div>
+      <div class="facebook">
+        <app-facebook-login-button></app-facebook-login-button>
+      </div>
+      <div class="twitter">
+        <app-twitter-login-button></app-twitter-login-button>
+      </div>
+      <div class="telegram">
+        <app-telegram-login-button></app-telegram-login-button>
+      </div>
+    </div>
+    <div class="login-title">
+      <h1>Sign In</h1>
+    </div>
+    <div class="subtitle social-subtitle">
+      with social account
+    </div>
+    <div class="subtitle credentials-subtitle">
+      with Comuse account
+    </div>
+    <div class="subtitle subtitle-or">or</div>
+    <form [formGroup]="loginForm" class="credentials"
+          (ngSubmit)="onConfirm()">
+      <mat-form-field
+        appearance="outline"
+        floatLabel="auto"
+        [style.width.%]="100"
+        *appHasErrorBox="emailErrors;direction:'right'">
+        <mat-label>Email</mat-label>
+        <input formControlName="email"
+               name="email"
+               matInput
+               type="email"
+               placeholder="Enter email..."/>
+      </mat-form-field>
+      <ng-template #emailErrors>
+        <ng-container *ngIf="loginForm | controlHasError: 'email' : 'required'">
+          Email address should <br>not be empty
+        </ng-container>
+        <ng-container *ngIf="loginForm | controlHasError: 'email' : 'email'">
+          Invalid email address
+        </ng-container>
+        <ng-container *ngIf="loginForm | controlHasError: 'email' : 'wrongCredentials' : 'pristine'">
+          Email might be incorrect
+        </ng-container>
+      </ng-template>
+      <mat-form-field appearance="outline"
+                      floatLabel="auto"
+                      [style.width.%]="100"
+                      *appHasErrorBox="passErrors;direction:'right'">
+        <mat-label>&nbsp;&nbsp;&nbsp;Password&nbsp;&nbsp;&nbsp;</mat-label>
+        <input formControlName="password"
+               matInput
+               name="password"
+               type="password"
+               placeholder="Enter password..."/>
+      </mat-form-field>
+      <ng-template #passErrors>
+        <ng-container *ngIf="loginForm | controlHasError: 'password' : 'required'">
+          Password should <br>not be empty
+        </ng-container>
+        <ng-container *ngIf="loginForm | controlHasError: 'password' : 'minlength'">
+          Password is too short
+        </ng-container>
+        <ng-container *ngIf="loginForm | controlHasError: 'password' : 'maxlength'">
+          Password is too long
+        </ng-container>
+        <ng-container *ngIf="loginForm | controlHasError: 'password' : 'wrongCredentials' : 'pristine'">
+          Password might be incorrect
+        </ng-container>
+      </ng-template>
+      <button
+        [disabled]="!loginForm.valid"
+        mat-flat-button class="confirm"
+        color="primary"
+        type="submit">
+        Sign In
+      </button>
+    </form>
+    <a class="signup" href="#">Don't have an account? Sign Up.</a>
+    <a class="forgot-pass" href="#">Forgot password? Restore.</a>
+  </div>
+</div>

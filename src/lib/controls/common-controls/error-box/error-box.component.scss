@@ -1,0 +1,63 @@
+:host {
+  position: relative;
+}
+
+
+.error-box-wrapper {
+  position: absolute;
+  background-color: var(--secondary1);
+  border: 2px solid var(--warn);
+  border-radius: 4px;
+  border-color: var(--warn);
+  color: var(--warn);
+  font-size: 1em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Roboto", sans-serif;
+  width: fit-content;
+  text-align: center;
+  box-sizing: border-box;
+
+  &:empty {
+    display: none;
+  }
+
+  &.left {
+    top: 0;
+    left: -4px;
+    transform: translateX(-100%);
+  }
+
+  &.right {
+    top: 2%;
+    bottom: 4%;
+    right: 0;
+    padding: 0 1em;
+    transform: translate(105%, 0%);
+    @keyframes grow-horizontal {
+      0% {
+        transform: translate(105%, 0%) scaleX(0);
+      }
+      100% {
+        transform: translate(105%, 0%) scaleX(1);
+      }
+    }
+
+    &.grow {
+      animation: grow-horizontal 0.2s forwards;
+    }
+  }
+
+  &.top {
+    top: 0;
+    left: 0;
+    transform: translate(50%, -115%);
+  }
+
+  &.bottom {
+    bottom: 0;
+    left: 0;
+    transform: translate(50%, 115%);
+  }
+}

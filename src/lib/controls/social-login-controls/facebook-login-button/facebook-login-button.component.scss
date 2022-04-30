@@ -1,0 +1,41 @@
+$white: #fff;
+$background: var(--primary2);
+$button-active-blue: #3A5A97;
+
+
+.facebook-btn {
+  width: 200px;
+  height: 42px;
+  background-color: $background;
+  border-radius: 4px;
+  overflow: hidden;
+  .facebook-icon-wrapper {
+    position: absolute;
+    width: 42px;
+    height: 42px;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .facebook-icon {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+  .btn-text {
+    float: right;
+    margin: 11px 11px 0 0;
+    color: $white;
+    font-size: 14px;
+    letter-spacing: 0.2px;
+    font-family: "Roboto", sans-serif;
+  }
+  &:hover {
+    box-shadow: 0 0 6px $background;
+    background: $button-active-blue;
+  }
+  &:active {
+    background: $button-active-blue;
+  }
+}
+
+@import url(https://fonts.googleapis.com/css?family=Roboto:500);
