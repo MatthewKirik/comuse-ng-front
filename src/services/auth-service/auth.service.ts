@@ -17,18 +17,20 @@ import {
 import {
   LoginResultModel
 } from "../../models/login-result-model";
+import {UserService} from "../user-service/user.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private userService: UserService) {
   }
 
   public isLoggedIn(): boolean {
     const loggedInString = localStorage.getItem('loggedIn');
-    if (loggedInString === 'true') return false;
+    if (loggedInString === 'true') return true;
     return false;
   }
 
@@ -38,6 +40,7 @@ export class AuthService {
       const request = this.http.post<LoginResultModel>(path, userData);
       const loginResult = await lastValueFrom(request);
       localStorage.setItem('loggedIn', 'true');
+      this.userService.cacheCurrentUser();
       return true;
     } catch (err: any) {
       if (err.status === HttpStatusCode.Unauthorized)
@@ -46,11 +49,14 @@ export class AuthService {
     }
   }
 
-  public async logout(): Promise<boolean> {
+  public async logout(): Promise<void> {
     const path = apiMap.auth.logout();
     const request = this.http.post(path, {});
     await lastValueFrom(request);
+    this.localLogout();
+  }
+
+  public localLogout(): void {
     localStorage.removeItem('loggedIn');
-    return true;
   }
 }

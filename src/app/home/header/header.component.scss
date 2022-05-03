@@ -32,12 +32,15 @@ header {
   flex-direction: row;
   justify-items: center;
   align-items: center;
+
   img {
     display: block;
   }
+
   .logo-flag {
     height: 90%;
   }
+
   .logo-title {
     height: 90%;
   }
@@ -80,6 +83,126 @@ header {
       transition: border-color .01s;
       color: var(--primary-contrast);
       border-color: var(--primary3);
+    }
+  }
+}
+
+.profile-info {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: 2em;
+  font-size: 1.2em;
+
+  .user-icon-wrapper {
+    z-index: 2;
+    background: var(--secondary1);
+    width: 2em;
+    height: 2em;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid var(--primary);
+    border-radius: 50%;
+  }
+
+  .user-name {
+    z-index: 2;
+    padding: .2em 1em .2em .8em;
+    margin-right: -.6em;
+    background: var(--secondary1);
+    border-radius: 3px 0 0 3px;
+    border: 3px solid var(--primary);
+  }
+
+  .user-icon-wrapper, .user-name {
+    transition: background-color .2s, border-color .2s;
+  }
+
+  .user-initial {
+    font-family: Roboto, sans-serif;
+    font-size: 1.7em;
+    color: var(--accent1);
+  }
+
+  .profile-menu-container {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 51%;
+    bottom: 0;
+  }
+
+  .profile-menu-wrapper {
+    width: 100%;
+    overflow: hidden;
+    background: var(--secondary1);
+    z-index: 1;
+    position: relative;
+    max-height: 0;
+    transition: max-height .3s ease-out;
+  }
+
+  .profile-menu {
+    width: 100%;
+    border: 3px solid var(--primary);
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    padding: 2em 0 0 0;
+    box-sizing: border-box;
+
+    button {
+      width:100%;
+      padding: .35em 0;
+      border: none;
+      border-top: 1px solid var(--primary);
+      letter-spacing: 1px;
+      font-size: .9em;
+      font-family: 'Roboto', 'sans-serif';
+      font-weight: bold;
+      background: var(--secondary1);
+      color: var(--accent1);
+      height: 80%;
+      transition: color .1s, border-color .3s;
+
+      &:hover {
+        color: var(--accent2);
+        border-color: var(--primary2);
+        transition: color .1s, border-color .3s;
+        text-decoration: underline;
+      }
+
+      &:active {
+        transition: border-color .01s;
+        color: var(--primary);
+        border-color: var(--primary3);
+      }
+    }
+  }
+
+  &:hover {
+    .user-icon-wrapper, .user-name {
+      background-color: var(--secondary1_light);
+      border-color: var(--primary2);
+      transition: background-color .2s, border-color .2s;
+    }
+  }
+  &:active {
+    .user-icon-wrapper, .user-name {
+      border-color: var(--primary);
+      transition: background-color .05s, border-color .05s;
+    }
+  }
+  &.expanded {
+    .profile-menu-wrapper {
+      max-height: 100px;
+      transition: max-height .3s ease-out;
     }
   }
 }

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {ErrorHandler, NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 
@@ -12,6 +12,7 @@ import {RouterModule} from "@angular/router";
 import {routes} from "../configs/routes";
 import {AllowCredentialsInterceptor} from "../services/interceptors/allow-credentials.interceptor";
 import {HomeModule} from "./home/home.module";
+import {GlobalErrorHandler} from "../services/error-handling/global-error-handler.service";
 
 @NgModule({
   declarations: [AppComponent],
@@ -31,7 +32,11 @@ import {HomeModule} from "./home/home.module";
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AllowCredentialsInterceptor,
-      multi: true
+      multi: true,
+    },
+    {
+      provide: ErrorHandler,
+      useClass: GlobalErrorHandler,
     }
   ],
   bootstrap: [AppComponent],

@@ -9,10 +9,28 @@
       <button class="nav-btn">Tasks</button>
       <button class="nav-btn">Community</button>
     </div>
-    <div class="profile-info">
-      <div class="user-name"></div>
-      <div class="user-icon">
-
+    <div class="profile-info noselect"
+         (click)="toggleProfileInfoExpand()"
+         [ngClass]="{ 'expanded': profileInfoExpanded }"
+         *ngIf="!!(currentUser | async)">
+      <div class="user-name">{{(currentUser | async)?.name}}</div>
+      <div class="user-icon-wrapper">
+        <ng-container *ngIf="(currentUser | async)?.image; then userIcon else userInitial"></ng-container>
+        <ng-template #userIcon>
+          <img class="user-icon">
+        </ng-template>
+        <ng-template #userInitial>
+          <div class="user-initial">
+            {{(currentUser | async)?.name?.charAt(0)?.toUpperCase()}}
+          </div>
+        </ng-template>
+      </div>
+      <div class="profile-menu-container">
+        <div class="profile-menu-wrapper">
+          <div class="profile-menu">
+            <button (click)="logout()">Log Out</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>

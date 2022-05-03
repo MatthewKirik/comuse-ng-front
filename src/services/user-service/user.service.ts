@@ -1,23 +1,23 @@
-import {Injectable} from '@angular/core';
+import {Injectable, OnInit} from '@angular/core';
 import {UserModel} from "../../models/user-model";
 import {apiMap} from "../../configs/api-map";
 import {HttpClient} from "@angular/common/http";
-import {lastValueFrom} from "rxjs";
+import {BehaviorSubject, lastValueFrom} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  public CurrentUser: UserModel;
+  public currentUser = new BehaviorSubject<UserModel | null>(null);
 
   constructor(private http: HttpClient) {
+    this.cacheCurrentUser();
   }
 
   public async cacheCurrentUser(): Promise<void> {
     const path = apiMap.user.getMe();
-
-    const request = this.http.post<UserModel>(path, {});
+    const request = this.http.get<UserModel>(path);
     const user = await lastValueFrom(request);
-    this.CurrentUser = user;
+    this.currentUser.next(user);
   }
 }

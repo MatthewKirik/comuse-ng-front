@@ -37,8 +37,12 @@ export class LoginComponent implements OnInit {
     const data = new LoginModel(
       this.loginForm.get("email")?.value,
       this.loginForm.get("password")?.value);
+    this.loginForm.markAsPristine();
+    this.loginForm.markAsUntouched();
     this.loginForm.reset();
+    await new Promise(r => setTimeout(r, 2000));
     const loggedIn = await this.authService.login(data);
+    await new Promise(r => setTimeout(r, 2000));
     if (loggedIn) {
       await this.router.navigate(['']);
     } else {
